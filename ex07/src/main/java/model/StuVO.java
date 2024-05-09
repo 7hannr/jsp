@@ -7,6 +7,7 @@ public class StuVO extends ProVO{
 	private int year;
 	private String birthday;
 	private String advisor;
+	
 	public String getScode() {
 		return scode;
 	}

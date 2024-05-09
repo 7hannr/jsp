@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 
 import model.*;
 
-@WebServlet(value={"/stu/list","/stu/list.json","/stu/total","/stu/insert","/stu/read"})
+@WebServlet(value={"/stu/list","/stu/list.json","/stu/total","/stu/insert","/stu/read", "/stu/update","/stu/delete"})
 public class StudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	StuDAOImpl dao=new StuDAOImpl();
@@ -25,6 +25,11 @@ public class StudentServlet extends HttpServlet {
 		RequestDispatcher dis=request.getRequestDispatcher("/home.jsp");
 		
 		switch(request.getServletPath()) {
+		case "/stu/update":
+			request.setAttribute("stu", dao.read(request.getParameter("scode")));
+			request.setAttribute("pageName", "/stu/update.jsp");
+			dis.forward(request, response);
+			break;
 		case "/stu/read":
 			request.setAttribute("stu", dao.read(request.getParameter("scode")));
 			request.setAttribute("pageName", "/stu/read.jsp");
@@ -59,6 +64,7 @@ public class StudentServlet extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		PrintWriter out=response.getWriter();
 		request.setCharacterEncoding("UTF-8");
 		switch(request.getServletPath()) {
 		case "/stu/insert":
@@ -72,7 +78,21 @@ public class StudentServlet extends HttpServlet {
 			dao.insert(vo);
 			response.sendRedirect("/stu/list");
 			break;
+		case "/stu/delete":
+			String scode=request.getParameter("scode");
+			out.print(dao.delete(scode));
+			break;
+		case "/stu/update":
+			vo=new StuVO();
+			vo.setScode(request.getParameter("scode"));
+			vo.setSname(request.getParameter("sname"));
+			vo.setSdept(request.getParameter("dept"));
+			vo.setYear(Integer.parseInt(request.getParameter("year")));
+			vo.setAdvisor(request.getParameter("advisor"));
+			vo.setBirthday(request.getParameter("birthday"));
+			dao.update(vo);
+			response.sendRedirect("/stu/read?scode=" + request.getParameter("scode"));
+			break;
 		}
 	}
-
 }

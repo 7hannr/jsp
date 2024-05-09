@@ -1,0 +1,23 @@
+package model;
+
+import java.util.ArrayList;
+
+public class CouDAOImpl implements CouDAO{
+
+	@Override
+	public ArrayList<CouVO> list(QueryVO vo) {
+		ArrayList<CouVO> array=new ArrayList<CouVO>();
+		try {
+			String sql="select * from view_cou";
+			sql += " where " + vo.getKey() + " like ?";
+			
+		}catch(Exception e) {
+			System.out.println("강좌목록:" + e.toString());
+		}
+		return array;
+	}
+		
+	
+}
+
+

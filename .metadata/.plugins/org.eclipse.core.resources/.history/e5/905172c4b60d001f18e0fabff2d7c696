@@ -1,0 +1,40 @@
+package controller;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import model.QueryVO;
+
+
+@WebServlet(value={"/cou/list.json"})
+public class CoursesServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+  
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		PrintWriter out=response.getWriter();
+		
+		switch(request.getServletPath()) {
+		case "/cou/list.json":
+			QueryVO vo=new QueryVO();
+			vo.setKey(request.getParameter("key"));
+			vo.setWord(request.getParameter("word"));
+			vo.setPage(Integer.parseInt(request.getParameter("page")));
+			vo.setSize(Integer.parseInt(request.getParameter("size")));
+			
+			break;
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+
+}
