@@ -11,6 +11,10 @@
 - **데이터베이스**: MySQL
 - **개발 환경**: Eclipse IDE
 
+**DB**:
+
+![KakaoTalk_20240814_110248361](https://github.com/user-attachments/assets/322a90e4-f50b-4eb0-89f7-3652528842ed)
+
 ![KakaoTalk_20240814_094057269](https://github.com/user-attachments/assets/fc7ed84a-b8c8-4143-b172-51fd084ef12f)
 
 1. **메인 페이지**
